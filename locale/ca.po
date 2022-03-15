@@ -1,0 +1,47 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:stock.configuration,delivery_note_action_report:"
+msgid "Report Template"
+msgstr "Informe"
+
+msgctxt "field:stock.configuration.company,company:"
+msgid "Company"
+msgstr "Empresa"
+
+msgctxt "field:stock.configuration.company,delivery_note_action_report:"
+msgid "Report Template"
+msgstr "Informe"
+
+msgctxt "field:stock.configuration.sequence,delivery_note_action_report:"
+msgid "Report Template"
+msgstr "Informe"
+
+msgctxt "field:stock.shipment.out,available_reports:"
+msgid "Available Reports"
+msgstr ""
+
+msgctxt "field:stock.shipment.out,delivery_note_report:"
+msgid "Report Template"
+msgstr "Informe"
+
+msgctxt "help:stock.configuration,delivery_note_action_report:"
+msgid "Default report used on shipment out"
+msgstr "Informe per defecte d'Albarà"
+
+msgctxt "model:ir.action,name:report_delivery"
+msgid "Shipment Out"
+msgstr "Albarà"
+
+msgctxt "model:ir.model.button,string:print_delivery_note_button"
+msgid "Delivery Note"
+msgstr "Albarà"
+
+msgctxt "model:stock.configuration.company,name:"
+msgid "Stock Configuration per Company"
+msgstr ""
+
+msgctxt "selection:party.alternative_report,model_name:"
+msgid "Shipment Out"
+msgstr "Albarà"
