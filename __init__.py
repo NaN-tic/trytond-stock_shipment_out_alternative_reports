@@ -11,6 +11,7 @@ def register():
         configuration.StockConfigurationCompany,
         configuration.StockConfiguration,
         shipment.PartyAlternativeReport,
+        shipment.Sale,
         shipment.ShipmentOut,
         module='stock_shipment_out_alternative_reports', type_='model')
     Pool.register(

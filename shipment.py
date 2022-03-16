@@ -1,6 +1,6 @@
 # The COPYRIGHT file at the top level of this repository contains the full
 # copyright notices and license terms.
-from trytond.model import fields, ModelView
+from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Eval, If
 from trytond.modules.html_report.engine import HTMLReportMixin
@@ -16,6 +16,27 @@ class PartyAlternativeReport(metaclass=PoolMeta):
         option = ('stock.shipment.out', 'Shipment Out')
         if option not in cls.model_name.selection:
             cls.model_name.selection.append(option)
+
+
+class Sale(metaclass=PoolMeta):
+    __name__ = 'sale.sale'
+
+    def create_shipment(self, shipment_type):
+        pool = Pool()
+        Shipment = pool.get('stock.shipment.out')
+
+        shipments = super().create_shipment(shipment_type)
+        if shipment_type != 'out':
+            return shipments
+        to_save = []
+        for shipment in shipments:
+            available_reports = shipment.on_change_with_available_reports()
+            if available_reports:
+                shipment.delivery_note_report = shipment.available_reports[0]
+                to_save.append(shipment)
+
+        Shipment.save(to_save)
+        return shipments
 
 
 class ShipmentOut(metaclass=PoolMeta):
@@ -77,8 +98,6 @@ class ShipmentOut(metaclass=PoolMeta):
         alternative_reports = self.on_change_with_available_reports()
         if default_report in alternative_reports:
             alternative_reports.remove(default_report)
-
-            self.delivery_note_report = alternative_reports[0]
         if alternative_reports and len(alternative_reports) == 1:
             self.delivery_note_report = alternative_reports[0]
         elif alternative_reports and len(alternative_reports) > 1:
@@ -100,8 +119,8 @@ class DeliveryNote(Report):
         Config = pool.get('stock.configuration')
         config = Config(1)
 
-        action_report = (config and config.delivery_note_action_report and
-            config.delivery_note_action_report.id or None)
+        action_report = (config and config.delivery_note_action_report
+            and config.delivery_note_action_report.id or None)
 
         if not action_report:
             raise Exception('Error', 'Report (%s) not find!' % cls.__name__)
