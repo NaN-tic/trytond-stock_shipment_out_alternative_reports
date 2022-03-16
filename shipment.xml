@@ -19,7 +19,6 @@
             <field name="name">Shipment Out</field>
             <field name="model">stock.shipment.out</field>
             <field name="report_name">stock.shipment.out.delivery</field>
-
             <field name="single" eval="True"/>
         </record>
     </data>
