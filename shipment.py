@@ -32,7 +32,7 @@ class Sale(metaclass=PoolMeta):
         for shipment in shipments:
             available_reports = shipment.on_change_with_available_reports()
             if available_reports:
-                shipment.delivery_note_report = shipment.available_reports[0]
+                shipment.delivery_note_report = available_reports[0]
                 to_save.append(shipment)
 
         Shipment.save(to_save)
