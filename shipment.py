@@ -26,6 +26,9 @@ class Sale(metaclass=PoolMeta):
         Shipment = pool.get('stock.shipment.out')
 
         shipments = super().create_shipment(shipment_type)
+        if not shipments:
+            return
+
         if shipment_type != 'out':
             return shipments
         to_save = []
