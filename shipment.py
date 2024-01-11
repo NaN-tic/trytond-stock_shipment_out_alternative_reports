@@ -55,7 +55,7 @@ class ShipmentOut(metaclass=PoolMeta):
             ],
         states={
             'readonly': ~Eval('state').in_(['draft']),
-            }, depends=['available_reports', 'state'])
+            })
 
     @staticmethod
     def default_delivery_note_report():
