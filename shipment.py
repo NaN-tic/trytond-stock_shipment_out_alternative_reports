@@ -69,11 +69,11 @@ class ShipmentOut(metaclass=PoolMeta):
     def on_change_with_available_reports(self, name=None):
         default_report = self.default_delivery_note_report()
         if not self.customer:
-            return [default_report]
+            return [default_report] if default_report else []
         alternative_reports = [ar.report.id for ar in
             self.customer.alternative_reports
             if ar.model_name == 'stock.shipment.out']
-        if default_report not in alternative_reports:
+        if default_report and default_report not in alternative_reports:
             alternative_reports.append(default_report)
         return alternative_reports
 
